@@ -56,6 +56,7 @@ class MemberWorkspaceRepository {
             }
         }
     }
+
     static async getAllByUserId(user_id){
     //.populate nos permite expandir los datos de una referencia
     const members = await MemberWorkspace.find({id_user: user_id}).populate('id_workspace')
@@ -75,6 +76,11 @@ class MemberWorkspaceRepository {
         }
     )
     return members_list_formatted
+    }
+
+    static async getByUserIdAndWorkspaceId (user_id, workspace_id){
+        const member = await MemberWorkspace.findOne({id_user: user_id, id_workspace: workspace_id})
+        return member
     }
 }
 
