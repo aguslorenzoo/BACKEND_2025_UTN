@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.router.js";
 import workspaceRouter from "./routes/workspace.router.js";
 import cors from 'cors'
 import memberRouter from "./routes/member.router.js";
+import MessagesChannelRepository from "./repositories/messageChannel.repository.js";
 
 
 connectToMongoDB()
@@ -27,3 +28,4 @@ app.listen(
         console.log(`Tu servidor se esta ejecutando correctamente en el puerto ${ENVIRONMENT.PORT}`)
     }
 )
+

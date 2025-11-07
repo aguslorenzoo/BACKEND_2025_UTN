@@ -1,12 +1,12 @@
 import MessageChannel from "../models/MessageChannel.model.js";
 
 class MessagesChannelRepository{
-    static async create(chanel_id, sender_member_id, content) {
+    static async create(channel_id, sender_member_id, content) {
         try {
             await MessageChannel.insertOne({
-                chanel_id:chanel_id,
-                sender_member_id:sender_member_id,
-                content:content
+                channel_id: channel_id,
+                sender_member_id: sender_member_id,
+                content: content
             })
             
         }
@@ -55,6 +55,30 @@ class MessagesChannelRepository{
             console.error('[SERVER ERROR]: no se pudo actualizar el mensaje', error)
             throw error
         }
+    }
+
+    static async getAllByChannelId (channel_id){
+        const messages = await MessageChannel.find({channel_id: channel_id})
+        .populate({
+            path: 'sender_member_id',
+            populate: {
+                path: 'id_user',
+                model: "User",
+                selection: 'name _id'
+            }
+        })
+
+        const messages_formatted = messages.map(
+            (message) => {
+                return {
+                    _id: message._id,
+                    message_content: message.content,
+                    member_id: message.sender_member_id._id,
+                    user_name: message.sender_member_id.id_user.name
+                }
+            }
+        )
+        return messages_formatted
     }
 }
 export default MessagesChannelRepository
