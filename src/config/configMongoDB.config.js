@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose'
 import ENVIRONMENT from './environment.config.js'
 

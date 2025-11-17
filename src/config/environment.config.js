@@ -1,11 +1,7 @@
 import dotenv from 'dotenv'
 
-
-//Cargar las variables de entorno en process.env
 dotenv.config()
 
-
-//Diccionario donde guando mis variables de entorno
 const ENVIRONMENT = {
     GMAIL_PASSWORD: process.env.GMAIL_PASSWORD,
     GMAIL_USER: process.env.GMAIL_USER,

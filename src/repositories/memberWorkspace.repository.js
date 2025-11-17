@@ -58,24 +58,23 @@ class MemberWorkspaceRepository {
     }
 
     static async getAllByUserId(user_id){
-    //.populate nos permite expandir los datos de una referencia
-    const members = await MemberWorkspace.find({id_user: user_id}).populate('id_workspace')
+        const members = await MemberWorkspace.find({id_user: user_id}).populate('id_workspace')
 
-    /* Dar formato a la respuesta, ya que mongoose nos da los datos pero desordenados */
-    const members_list_formatted = members.map(
-        (member) => {
-            return {
-                workspace_id: member.id_workspace._id,
-                workspace_name: member.id_workspace.name,
-                workspace_created_at: member.id_workspace.created_at,
-                workspace_url_image: member.id_workspace.url_image,
-                member_id: member._id,
-                member_user_id: member.id_user,
-                member_role: member.role
+        const members_list_formatted = members
+            .filter(member => member.id_workspace !== null) 
+            .map((member) => {
+                return {
+                    workspace_id: member.id_workspace._id,
+                    workspace_name: member.id_workspace.name,
+                    workspace_created_at: member.id_workspace.created_at,
+                    workspace_url_image: member.id_workspace.url_image,
+                    member_id: member._id,
+                    member_user_id: member.id_user,
+                    member_role: member.role
+                }
             }
-        }
-    )
-    return members_list_formatted
+        )
+        return members_list_formatted
     }
 
     static async getByUserIdAndWorkspaceId (user_id, workspace_id){
