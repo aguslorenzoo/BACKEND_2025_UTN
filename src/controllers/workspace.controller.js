@@ -137,20 +137,6 @@ class WorkspaceController {
 
     static async invite(request, response){
         try{
-            /* 
-            - verificar que exista un usuario con el email invited
-                porque hay que chequear que el usuario invitado exista
-            
-            - verificar que no este en el workspace (no tener miembros duplicados)
-            
-            - generar un token con:
-            {
-                id_invited,
-                id_inviter,
-                id_workspace,
-                invited_role            
-            } 
-            */
             const { member, workspace_selected, user} = request
             const { email_invited, role_invited} = request.body
 

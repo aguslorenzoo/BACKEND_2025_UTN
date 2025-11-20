@@ -13,6 +13,8 @@ const app = express()
 
 app.use( cors() )
 app.use(express.json())
+
+
 app.use('/api/auth', authRouter)
 app.use('/api/workspace', workspaceRouter)
 app.use('/api/member', memberRouter)

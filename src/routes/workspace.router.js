@@ -24,7 +24,7 @@ workspaceRouter.post(
 
 // Obtener espacio de trabajo especifico para mostrar los channels
 workspaceRouter.get(
-    '/:workspace_id',
+    '/:workspace_id/channels',
     authMiddleware,
     workspaceMiddleware(),
     WorkspaceController.getById
@@ -34,13 +34,9 @@ workspaceRouter.get(
 workspaceRouter.post(
     '/:workspace_id/channels',
     authMiddleware,
-    workspaceMiddleware(['admin']), //solo admin pueden crear canales
+    workspaceMiddleware(['admin']), 
     ChannelController.create
 )
-
-// CONSIGNA:
-// Crear los controladores para crear mensajes y obtener mensajes
-// Siempre qeu se creer o obetenga la lista el servidor debera responde con la lista de mensajes
 
 // Crear mensajes
 workspaceRouter.post(
@@ -59,23 +55,6 @@ workspaceRouter.get(
     channelMiddleware,
     MessagesChannelController.getAllByChannelId
 )
-
-
-workspaceRouter.get(
-    '/:workspace_id/test',
-    authMiddleware,
-    workspaceMiddleware(['admin']),
-    (request, response) => {
-        console.log(request.workspace_selected)
-        console.log(request.member)
-        response.json({
-            ok: true,
-            status: 200,
-            message: 'test'
-        })
-    }
-)
-
 
 workspaceRouter.post(
     '/:workspace_id/invite',
