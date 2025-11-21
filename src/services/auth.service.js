@@ -44,87 +44,107 @@ class AuthService {
                 <style>
                     body { 
                         margin: 0; 
-                        padding: 40px 20px; 
-                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-                        background-color: #fafafa; 
+                        padding: 0; 
+                        font-family: 'Arial', sans-serif; 
+                        background-color: #f6f9fc; 
                     }
-                    .card { 
-                        max-width: 500px; 
+                    .container { 
+                        max-width: 600px; 
                         margin: 0 auto; 
-                        background: white; 
-                        border-radius: 16px; 
-                        box-shadow: 0 8px 30px rgba(0,0,0,0.08); 
-                        padding: 50px 40px; 
-                        text-align: center;
-                        border: 1px solid #f0f0f0;
+                        background: #ffffff; 
+                        border-radius: 12px; 
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+                        overflow: hidden; 
                     }
-                    .icon {
-                        font-size: 48px;
-                        margin-bottom: 20px;
+                    .header { 
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                        padding: 40px 30px; 
+                        text-align: center; 
+                        color: white; 
+                    }
+                    .content { 
+                        padding: 40px 30px; 
+                        color: #333; 
+                        line-height: 1.6; 
+                    }
+                    .button { 
+                        display: inline-block; 
+                        padding: 14px 35px; 
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                        color: white; 
+                        text-decoration: none; 
+                        border-radius: 8px; 
+                        font-weight: bold; 
+                        font-size: 16px; 
+                        margin: 25px 0; 
+                        transition: transform 0.2s, box-shadow 0.2s; 
+                    }
+                    .button:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+                    }
+                    .footer { 
+                        background: #f8f9fa; 
+                        padding: 25px; 
+                        text-align: center; 
+                        color: #666; 
+                        font-size: 13px; 
+                        border-top: 1px solid #eaeaea;
                     }
                     .title {
-                        color: #1a202c;
-                        font-size: 24px;
+                        color: #2d3748;
+                        margin-bottom: 20px;
+                        font-size: 28px;
                         font-weight: 600;
-                        margin-bottom: 15px;
                     }
-                    .message {
+                    .text {
                         color: #4a5568;
+                        margin-bottom: 25px;
                         font-size: 16px;
-                        line-height: 1.6;
-                        margin-bottom: 30px;
-                    }
-                    .verify-btn {
-                        display: inline-block;
-                        background: #3182ce;
-                        color: white;
-                        padding: 14px 32px;
-                        text-decoration: none;
-                        border-radius: 10px;
-                        font-weight: 600;
-                        font-size: 15px;
-                        transition: all 0.3s ease;
-                        margin: 20px 0;
-                    }
-                    .verify-btn:hover {
-                        background: #2c5aa0;
-                        transform: translateY(-1px);
-                        box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
-                    }
-                    .link-text {
-                        color: #718096;
-                        font-size: 13px;
-                        margin-top: 25px;
-                        word-break: break-all;
-                        background: #f7fafc;
-                        padding: 12px;
-                        border-radius: 6px;
-                        border-left: 3px solid #3182ce;
                     }
                 </style>
             </head>
             <body>
-                <div class="card">
-                    <div class="icon">✉️</div>
-                    <h1 class="title">Verifica tu email</h1>
-                    <p class="message">
-                        Para activar tu cuenta y asegurar la seguridad de tu información, 
-                        necesitamos que verifiques tu dirección de email.
-                    </p>
+                <div class="container">
+                    <div class="header">
+                        <h1 style="margin: 0; font-size: 32px;">🔐 Verifica tu cuenta</h1>
+                    </div>
                     
-                    <a href="${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email/${verification_token}" 
-                    class="verify-btn">
-                        Verificar Email
-                    </a>
+                    <div class="content">
+                        <h2 class="title">¡Ya casi estás listo!</h2>
+                        <p class="text">
+                            Para completar tu registro y comenzar a usar nuestra plataforma, 
+                            por favor verifica tu dirección de email haciendo clic en el siguiente botón:
+                        </p>
+                        
+                        <div style="text-align: center;">
+                            <a href="${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email/${verification_token}" 
+                            class="button">
+                                Verificar Mi Cuenta
+                            </a>
+                        </div>
+                        
+                        <p class="text" style="color: #718096; font-size: 14px;">
+                            Si el botón no funciona, copia y pega este enlace en tu navegador:<br>
+                            <span style="color: #667eea; word-break: break-all;">
+                                ${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email/${verification_token}
+                            </span>
+                        </p>
+                    </div>
                     
-                    <div class="link-text">
-                        ${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email/${verification_token}
+                    <div class="footer">
+                        <p style="margin: 0 0 10px 0;">
+                            Si no solicitaste esta verificación, por favor ignora este mensaje.
+                        </p>
+                        <p style="margin: 0; color: #a0aec0;">
+                            &copy; 2024 Tu Empresa. Todos los derechos reservados.
+                        </p>
                     </div>
                 </div>
             </body>
             </html>
             `
-        })
+        });
 
         return
     }
