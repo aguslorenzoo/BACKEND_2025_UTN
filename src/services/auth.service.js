@@ -37,8 +37,92 @@ class AuthService {
             to: email,
             subject: 'Verifica tu cuenta de mail',
             html: `
-                <h1>Verifica tu cuenta de mail</h1>
-                <a href="${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email/${verification_token}">Verificar</a>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    body { 
+                        margin: 0; 
+                        padding: 40px 20px; 
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                        background-color: #fafafa; 
+                    }
+                    .card { 
+                        max-width: 500px; 
+                        margin: 0 auto; 
+                        background: white; 
+                        border-radius: 16px; 
+                        box-shadow: 0 8px 30px rgba(0,0,0,0.08); 
+                        padding: 50px 40px; 
+                        text-align: center;
+                        border: 1px solid #f0f0f0;
+                    }
+                    .icon {
+                        font-size: 48px;
+                        margin-bottom: 20px;
+                    }
+                    .title {
+                        color: #1a202c;
+                        font-size: 24px;
+                        font-weight: 600;
+                        margin-bottom: 15px;
+                    }
+                    .message {
+                        color: #4a5568;
+                        font-size: 16px;
+                        line-height: 1.6;
+                        margin-bottom: 30px;
+                    }
+                    .verify-btn {
+                        display: inline-block;
+                        background: #3182ce;
+                        color: white;
+                        padding: 14px 32px;
+                        text-decoration: none;
+                        border-radius: 10px;
+                        font-weight: 600;
+                        font-size: 15px;
+                        transition: all 0.3s ease;
+                        margin: 20px 0;
+                    }
+                    .verify-btn:hover {
+                        background: #2c5aa0;
+                        transform: translateY(-1px);
+                        box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+                    }
+                    .link-text {
+                        color: #718096;
+                        font-size: 13px;
+                        margin-top: 25px;
+                        word-break: break-all;
+                        background: #f7fafc;
+                        padding: 12px;
+                        border-radius: 6px;
+                        border-left: 3px solid #3182ce;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="card">
+                    <div class="icon">✉️</div>
+                    <h1 class="title">Verifica tu email</h1>
+                    <p class="message">
+                        Para activar tu cuenta y asegurar la seguridad de tu información, 
+                        necesitamos que verifiques tu dirección de email.
+                    </p>
+                    
+                    <a href="${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email/${verification_token}" 
+                    class="verify-btn">
+                        Verificar Email
+                    </a>
+                    
+                    <div class="link-text">
+                        ${ENVIRONMENT.URL_BACKEND}/api/auth/verify-email/${verification_token}
+                    </div>
+                </div>
+            </body>
+            </html>
             `
         })
 
