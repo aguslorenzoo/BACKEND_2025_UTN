@@ -113,7 +113,7 @@ class AuthService {
                     <div class="content">
                         <h2 class="title">¡Ya casi estás listo!</h2>
                         <p class="text">
-                            Para completar tu registro y comenzar a usar nuestra plataforma, 
+                            Para completar tu registro y comenzar a usar Discord Clone, 
                             por favor verifica tu dirección de email haciendo clic en el siguiente botón:
                         </p>
                         
@@ -135,9 +135,6 @@ class AuthService {
                     <div class="footer">
                         <p style="margin: 0 0 10px 0;">
                             Si no solicitaste esta verificación, por favor ignora este mensaje.
-                        </p>
-                        <p style="margin: 0; color: #a0aec0;">
-                            &copy; 2024 Tu Empresa. Todos los derechos reservados.
                         </p>
                     </div>
                 </div>
