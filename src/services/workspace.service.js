@@ -14,11 +14,14 @@ class WorkspaceService {
     }
 
     static async create(user_id, name, url_image){
-        // crear el espacio de trabajo 
         const worksapce_created = await WorkspaceRepository.create(name, url_image)
-        // crear al miembro con rol de admin ya que es el creador
         await MemberWorkspaceRepository.create(user_id, worksapce_created, 'admin')
         return worksapce_created
+    }
+
+    static async deleteById (workspace_id){
+        const workspace_delete = await WorkspaceRepository.deleteById(workspace_id)
+        return workspace_delete
     }
 
     static async invite (member, workspace_selected, email_invited, role_invited){
@@ -44,7 +47,7 @@ class WorkspaceService {
             {
                 expiresIn:'7d'
             }
-        )
+        ) 
 
         await mailTransporter.sendMail({
             to: email_invited,

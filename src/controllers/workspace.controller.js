@@ -8,10 +8,8 @@ import jwt from 'jsonwebtoken'
 class WorkspaceController {
     static async getAll (request, response){
         try{
-            // MUESTRO LOS DATOS DE SESION DEL USUARIO
             const user = request.user
             
-            // Necesito saber el user_id del cliente para saber exactamente quien es y que lista debo darle
             const workspaces = await WorkspaceService.getAll(user.id)
 
             response.status(200).json(
@@ -49,6 +47,48 @@ class WorkspaceController {
             }
         }
     }
+
+    static async deleteById (request, response) {
+        try{
+            const {workspace_selected} = request
+            const workspace_delete = await WorkspaceService.deleteById(workspace_selected._id)
+            response.status(200).json(
+                {
+                    ok: true,
+                    status: 200,
+                    message: 'Espacio de trabajo eliminado correctamente',
+                    data: {
+                        workspace_deleted: workspace_selected,
+                    }
+                }
+            )
+        
+        }
+        catch (error){
+            if(error.status){
+                return response.status(error.status).json(
+                    {
+                        ok: false,
+                        message: error.message,
+                        status: error.status
+                    }
+                )
+            }
+            else{
+                console.error(
+                    'Error al eliminar espacio de trabajo', error
+                )
+                return response.status(500).json(
+                    {
+                        ok: false,
+                        message: 'Error interno de servidor',
+                        status: 500
+                    }
+                )
+            }
+        }
+    }
+    
 
     static async getById (request, response){
         try{
@@ -138,7 +178,7 @@ class WorkspaceController {
     static async invite(request, response){
         try{
             const { member, workspace_selected, user} = request
-            const { email_invited, role_invited} = request.body
+            const { email_invited, role_invited} = request.body 
 
             await WorkspaceService.invite(member, workspace_selected, email_invited, role_invited)
             

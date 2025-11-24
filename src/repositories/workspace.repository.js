@@ -1,7 +1,7 @@
 import Workspace from "../models/Workspace.model.js";
 
 class WorkspaceRepository {
-    static async create(name, url_image) {
+    static async create(name, url_image) { 
         try {
             return await Workspace.create({
                 name: name,
@@ -35,17 +35,17 @@ class WorkspaceRepository {
     }
     static async deleteById(workspace_id) {
         try {
-            const workspaece_delete = await Workspace.findByIdAndDelete(workspace_id)
-            return workspaece_delete
+            const workspace_delete = await Workspace.findByIdAndDelete(workspace_id)
+            return workspace_delete
         }
         catch (error) {
             console.error('[SERVER ERROR]: no se pudo eliminar el worksapce con el id' + workspace_id, error);
             throw error
         }
     }
-    static async updateById(worksapce_id, worksapce_update) {
+    static async updateById(workspace_id, workspace_update) {
         try {
-            const update = await Workspace.findByIdAndUpdate(worksapce_id, worksapce_update)
+            const update = await Workspace.findByIdAndUpdate(workspace_id, workspace_update)
             return update
         }
         catch (error) {

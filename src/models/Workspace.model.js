@@ -3,7 +3,7 @@ import moongoose from "mongoose";
 const workspaceSchema = new moongoose.Schema(
     {
         name: {
-            type: String,
+            type: String, 
             required: true
         },
         url_image: {

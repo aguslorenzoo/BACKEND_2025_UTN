@@ -22,6 +22,13 @@ workspaceRouter.post(
     WorkspaceController.create
 )
 
+workspaceRouter.delete(
+    '/:workspace_id',
+    authMiddleware,
+    workspaceMiddleware(['admin']), 
+    WorkspaceController.deleteById
+);
+
 // Obtener espacio de trabajo especifico para mostrar los channels
 workspaceRouter.get(
     '/:workspace_id/channels',
@@ -36,6 +43,14 @@ workspaceRouter.post(
     authMiddleware,
     workspaceMiddleware(['admin']), 
     ChannelController.create
+)
+
+//eliminar canal
+workspaceRouter.delete(
+    '/:workspace_id/channels/:channel_id',
+    authMiddleware,
+    workspaceMiddleware(),
+    ChannelController.deleteById
 )
 
 // Crear mensajes
