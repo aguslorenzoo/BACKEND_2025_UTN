@@ -50,6 +50,38 @@ class MemberController {
             }
         }
     }
+
+    static async getCurrentMember(request, response) {
+        try {
+            const { member } = request
+            
+            response.status(200).json({
+                ok: true,
+                status: 200,
+                message: 'Member obtenido exitosamente',
+                data: {
+                    member_id: member._id,
+                    role: member.role,
+                    user_id: member.id_user
+                }
+            });
+        } catch (error) {
+            if (error.status) {
+                return response.status(error.status).json({
+                    ok: false,
+                    message: error.message,
+                    status: error.status
+                });
+            } else {
+                console.error('ERROR al obtener member actual', error);
+                return response.status(500).json({
+                    ok: false,
+                    message: 'Error interno de servidor',
+                    status: 500
+                });
+            }
+        }
+    }
 }
 
 export default MemberController;

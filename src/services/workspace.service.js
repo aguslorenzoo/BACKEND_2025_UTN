@@ -49,14 +49,23 @@ class WorkspaceService {
             }
         ) 
 
-        await mailTransporter.sendMail({
+        await mailTransporter.sendMail({ 
             to: email_invited,
             from: ENVIRONMENT.GMAIL_USER,
             subject: "Te han invitado a un espacio de trabajo",
             html: `
-                    <h1>Has sido invitado al workspace: ${workspace_selected.name}</h1>
-                    <a href="${ENVIRONMENT.URL_BACKEND}/api/member/confirm/${invitation_token}">Aceptar</a>
-                `
+                <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px; text-align: center;">
+                    <h1 style="color: #5865F2; margin-bottom: 25px; font-size: 24px;">
+                        ¡Te han invitado al workspace: ${workspace_selected.name}
+                    </h1>
+                    
+                    <a href="${ENVIRONMENT.URL_BACKEND}/api/member/confirm/${invitation_token}" 
+                    style="display: inline-block; padding: 12px 30px; background: #5865F2; color: white; 
+                            text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+                        Unirse al Workspace
+                    </a>
+                </div>
+            `
         })
     }
 }

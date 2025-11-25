@@ -5,6 +5,7 @@ import workspaceMiddleware from '../middlewares/workspaceMiddleware.js'
 import ChannelController from '../controllers/channel.controller.js'
 import channelMiddleware from '../middlewares/channelMiddleware.js'
 import MessagesChannelController from '../controllers/messagesChannel.controller.js'
+import MemberController from '../controllers/member.controller.js'
 
 const workspaceRouter = express.Router()
 
@@ -27,7 +28,7 @@ workspaceRouter.delete(
     authMiddleware,
     workspaceMiddleware(['admin']), 
     WorkspaceController.deleteById
-);
+)
 
 // Obtener espacio de trabajo especifico para mostrar los channels
 workspaceRouter.get(
@@ -50,7 +51,15 @@ workspaceRouter.delete(
     '/:workspace_id/channels/:channel_id',
     authMiddleware,
     workspaceMiddleware(),
+    channelMiddleware,
     ChannelController.deleteById
+)
+
+workspaceRouter.get(
+    '/:workspace_id/current-member',
+    authMiddleware,
+    workspaceMiddleware(),
+    MemberController.getCurrentMember
 )
 
 // Crear mensajes
