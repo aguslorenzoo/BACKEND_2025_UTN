@@ -9,14 +9,12 @@ import MemberController from '../controllers/member.controller.js'
 
 const workspaceRouter = express.Router()
 
-// Obtener la lista de espacios de trabajo DEL CLIENTE QUE ME ESTA CONSULTANDO
 workspaceRouter.get(
     '/',
     authMiddleware,
     WorkspaceController.getAll
 )
 
-// Crear un workspace
 workspaceRouter.post(
     '/',
     authMiddleware,
@@ -30,7 +28,6 @@ workspaceRouter.delete(
     WorkspaceController.deleteById
 )
 
-// Obtener espacio de trabajo especifico para mostrar los channels
 workspaceRouter.get(
     '/:workspace_id/channels',
     authMiddleware,
@@ -38,7 +35,6 @@ workspaceRouter.get(
     WorkspaceController.getById
 )
 
-// Crear nuevo canal
 workspaceRouter.post(
     '/:workspace_id/channels',
     authMiddleware,
@@ -46,7 +42,6 @@ workspaceRouter.post(
     ChannelController.create
 )
 
-//eliminar canal
 workspaceRouter.delete(
     '/:workspace_id/channels/:channel_id',
     authMiddleware,
@@ -62,7 +57,6 @@ workspaceRouter.get(
     MemberController.getCurrentMember
 )
 
-// Crear mensajes
 workspaceRouter.post(
     '/:workspace_id/channels/:channel_id/messages',
     authMiddleware,
@@ -71,7 +65,6 @@ workspaceRouter.post(
     MessagesChannelController.create
 )
 
-// Obtener mensajes
 workspaceRouter.get(
     '/:workspace_id/channels/:channel_id/messages',
     authMiddleware,

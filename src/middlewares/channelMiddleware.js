@@ -1,13 +1,5 @@
 import { ServerError } from "../error.js"
 import ChannelRepository from "../repositories/channel.repository.js"
-/* 
-    Va en las consultas hacia:
-    /api/workspace/:workspace_id/:channel_id
-
-    Responsabilidades:
-    - Verificar que exista el channel en Db y pertenezca al workspace
-    - Guardar el channel_selected dentro de el objeto request
-*/
 
 async function channelMiddleware (request, response, next) {
     try {

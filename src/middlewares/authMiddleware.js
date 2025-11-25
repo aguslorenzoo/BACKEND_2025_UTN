@@ -15,7 +15,6 @@ function authMiddleware (request, response, next){
         }
 
         const user_session_data = jwt.verify(auth_token, ENVIRONMENT.JWT_SECRET)
-        // IMPORTANTE: GUARDAMOS LOS DAOS DEL TOKEN DENTRO DE LA REQUEST
         request.user = user_session_data
         next()
     }

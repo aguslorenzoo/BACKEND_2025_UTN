@@ -47,7 +47,6 @@ class AuthController {
         }
         catch(error){
 
-            //TODO: Si hay algun fallo reenviar el mail de validacion
             if(error.status){
                 response.send(
                     `<h1>${error.message}</h1>`

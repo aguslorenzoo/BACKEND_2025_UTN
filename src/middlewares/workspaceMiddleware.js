@@ -8,24 +8,20 @@ function workspaceMiddleware (valid_member_roles = []) {
             const { workspace_id } = request.params
             const user = request.user
 
-            // chequear que el workspace con x id exista
             const workspace_selected = await WorkspaceRepository.getById(workspace_id)
             if(!workspace_selected){
                 throw new ServerError(404, 'Workspace no encontrado')
             }
 
-            // chequear si el cliente es un miembro de ese workspace
             const member = await MemberWorkspaceRepository.getByUserIdAndWorkspaceId(user.id, workspace_id)
             if(!member){
                 throw new ServerError(403, 'No tienes acceso a este workspace')
             }
             
-            // chequear si el miembro cuenta con el rol permitido
             if(valid_member_roles.length > 0 && !valid_member_roles.includes(member.role)){
                 throw new ServerError(403, 'No puede realizar esta operación')
             }
 
-            // guardamos en la request los datos del miembro y del espacio de trabajo
             request.member = member
             request.workspace_selected = workspace_selected
             next()

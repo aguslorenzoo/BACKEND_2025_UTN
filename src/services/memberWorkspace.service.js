@@ -5,15 +5,7 @@ import { ServerError } from '../error.js'
 
 class MemberWorkspaceService {
     static async confirmInvitation (invitacion_token) {
-        const invitation_token_decoded = jwt.verify(invitacion_token, ENVIRONMENT.JWT_SECRET)
-        /*             
-            {
-                id_invited: user_invited._id,
-                id_inviter: member._id,
-                id_workspace: workspace_selected._id,
-                invited_role: role_invited
-            } 
-        */    
+        const invitation_token_decoded = jwt.verify(invitacion_token, ENVIRONMENT.JWT_SECRET)   
         const {
             id_invited,
             id_workspace,
