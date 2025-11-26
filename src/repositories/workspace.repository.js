@@ -23,7 +23,7 @@ class WorkspaceRepository {
             throw error
         }
     }
-    static async getById(workspace_id) {
+    static async getById(workspace_id) { 
         try {
             const workspace_found = await Workspace.findById(workspace_id)
             return workspace_found

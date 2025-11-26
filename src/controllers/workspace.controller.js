@@ -175,6 +175,62 @@ class WorkspaceController {
         }  
     }
 
+    static async updateById(request, response) {
+        try {
+            const { workspace_selected } = request;
+            const { name, url_image } = request.body;
+
+            if (!name && !url_image) {
+                return response.status(400).json({
+                    ok: false,
+                    message: 'Se debe proporcionar al menos un campo para actualizar (name o url_image)',
+                    status: 400
+                })
+            }
+
+            const workspace_update = { 
+                modified_at: new Date() 
+            }
+
+            if (name !== undefined) workspace_update.name = name
+            if (url_image !== undefined) workspace_update.url_image = url_image
+
+            const workspace_updated = await WorkspaceService.updateById(
+                workspace_selected._id, 
+                workspace_update
+            )
+
+            response.status(200).json({
+                ok: true,
+                status: 200,
+                message: 'Workspace actualizado correctamente',
+                data: {
+                    workspace_updated
+                }
+            })
+
+        } catch (error) {
+            if (error.status) {
+                return response.status(error.status).json(
+                    {
+                        ok: false,
+                        message: error.message,
+                        status: error.status
+                    }
+                )
+            } else {
+                console.error('Error al actualizar workspace', error)
+                return response.status(500).json(
+                    {
+                        ok: false,
+                        message: 'Error interno de servidor',
+                        status: 500
+                    }
+                )
+            }
+        }
+    }
+
     static async invite(request, response){
         try{
             const { member, workspace_selected, user} = request

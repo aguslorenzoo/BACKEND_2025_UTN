@@ -19,6 +19,11 @@ class WorkspaceService {
         return worksapce_created
     }
 
+    static async updateById (workspace_id, workspace_update){
+        const update = await WorkspaceRepository.updateById(workspace_id, workspace_update)
+        return update
+    }
+
     static async deleteById (workspace_id){
         const workspace_delete = await WorkspaceRepository.deleteById(workspace_id)
         return workspace_delete

@@ -37,6 +37,13 @@ Discord Clone es una aplicación web de mensajería que replica las funcionalida
             Body: `{ name, url_image }`
             Response: `{ status: 201, ok: true, data: { workspace_created } }`
 
+        - PUT /api/workspace/:workspace_id 
+            Actualiza un workspace existente.
+            Headers: Authorization: Bearer <token>
+            Body: { name, url_image }
+
+Response: { status: 200, ok: true, data: { workspace_updated } }
+
         - DELETE /api/workspace/:workspace_id
             Elimina un workspace (solo admin).
             Headers: `Authorization: Bearer <token>`

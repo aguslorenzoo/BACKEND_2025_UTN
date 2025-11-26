@@ -21,6 +21,13 @@ workspaceRouter.post(
     WorkspaceController.create
 )
 
+workspaceRouter.put(
+    '/:workspace_id',
+    authMiddleware,
+    workspaceMiddleware(['admin']),
+    WorkspaceController.updateById
+)
+
 workspaceRouter.delete(
     '/:workspace_id',
     authMiddleware,
